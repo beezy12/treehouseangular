@@ -8,7 +8,7 @@
 <body ng-app="todoListApp">
 
     <!-- <hello-world></hello-world> -->
-        <h1 ng-click="helloWorld()">beezys to-dos</h1>
+    <h1 ng-click="helloWorld()">beezys to-dos</h1>
 
     <div ng-controller="mainCtrl" class="list">
 
@@ -26,8 +26,12 @@
             todo.edited to true. then here, if todo.edited is true, it applies the
             'edited' class....which just puts the word 'edited' on the page next to the
             input box -->
-        <div class="item" ng-class="{'editing.item': editing, 'edited': todo.edited, 'completed': todo.completed}" ng-repeat="todo in todos">
+        <div class="item" ng-class="{'editing.item': editing, 'edited': todo.edited, 'completed': todo.completed}" ng-repeat="todo in todos | orderBy: 'completed'" ng-init="todo.completed = false">
+        <!-- above I am filtering | orderBY whether the task is completed, and the true means reverse
+        is true. read the angular docs on that for more info. this is moving the completed task to the
+        bottom when it is checked completed. (we took that part off after we did this next part). ng-init is on there to set each item to false, because it ordered them weird. undefined items first, unchecked items second, and items that had been checked but now unchecked last. look at ng-inspector for that. the complete false or true doesn't get added until a box has been checked -->
             <input ng-model="todo.completed" type="checkbox"/>
+
             <!-- hide the label if editing is true down below -->
             <label ng-hide="editing">{{todo.name}}</label>
                <!-- ng-model binds this inputs value to an object on the scope. the todo object.
