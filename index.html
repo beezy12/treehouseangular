@@ -8,9 +8,14 @@
 <body ng-app="todoListApp">
 
     <!-- <hello-world></hello-world> -->
+        <h1 ng-click="helloWorld()">beezys to-dos</h1>
 
     <div ng-controller="mainCtrl" class="list">
-        <h1 ng-click="helloWorld()">beezys to-dos</h1>
+
+        <div class="add">
+            <a href="" ng-click="addTodo()">+ add a new task</a>
+        </div>
+
         <!-- for ng-class you pass in an object, where the key is the class you want
             to apply. the second part (editing) is the condition you are evaluating, if
             it is true then you apply the editing.item class to the element, which can
@@ -41,8 +46,10 @@
                 <!-- look at ng-inspector to see how the editing is toggled. notice the ng-hide
                 around that hide their content based on whether editing is true or false. -->
                 <a href="" ng-click="editing = !editing">edit</a>
-                <a href="" ng-click="helloConsole()">save</a>
-                <a href="" class="delete">delete</a>
+                <a href="" ng-click="saveTodo(todo)">save</a>
+                <!-- $index here is a special local variable that comes with every element's local
+                scope in an ng-repeat. index is the position of this todo in the array -->
+                <a href="" ng-click="deleteTodo(todo, $index)" class="delete">delete</a>
             </div>
         </div>
     </div>

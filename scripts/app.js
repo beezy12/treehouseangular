@@ -6,6 +6,12 @@
 angular.module("todoListApp", [])
 .controller('mainCtrl', function($scope, dataService) {
 
+    // angular is so awesome that it will auto update the ui as the new todo is added
+    // to the $scope.todos
+    $scope.addTodo = function() {
+        var todo = {name: 'this is a new todo'};
+        $scope.todos.push(todo);
+    };
 
     $scope.helloConsole = dataService.helloConsole;
 
@@ -32,6 +38,15 @@ angular.module("todoListApp", [])
     //     {"name": "pay dem bills"}
     // ]
 
+    $scope.deleteTodo = function(todo, $index) {
+        dataService.deleteTodo(todo);
+        $scope.todos.splice($index, 1);
+    };
+
+    $scope.saveTodo = function(todo) {
+        dataService.saveTodo(todo);
+    }
+
 })
 
                             // inserting the $http here is called 'dependency injection'
@@ -45,8 +60,16 @@ angular.module("todoListApp", [])
     this.getTodos = function(callback) {
         $http.get('mock/todos.json')
         .then(callback)
+    };
 
-    }
+    this.deleteTodo = function(todo) {
+        console.log('the name of the deleted todo is ', todo);
+    };
+
+    this.saveTodos = function(todo) {
+        console.log('you saved the ' + todo + ' chore.')
+    };
+
 });
 
 
