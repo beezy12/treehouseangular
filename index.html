@@ -11,12 +11,21 @@
 
     <div ng-controller="mainCtrl" class="list">
         <h1 ng-click="helloWorld()">beezys to-dos</h1>
-        <input type="checkbox"/>
-        <label class="editing-label">sampling to-do here</label>
-        <input class="editing-label" type="text"/>
+        <input ng-model="todo.completed" type="checkbox"/>
+        <!-- hide the label if editing is true down below -->
+        <label ng-hide="editing" class="editing-label">{{todo.name}}</label>
+           <!-- ng-model binds this inputs value to an object on the scope. the todo object.
+           open ng-inspector and watch as a variable is created as you type in the input.
+           we then changed it to todo.name. and you can watch in ng-inspector as todo is the object
+           and name is the key -->
+           <!-- ng-show shows the inputs contents if editing is true down below. notice
+           above that ng-hide hides stuff while editing is true -->
+        <input ng-show="editing" ng-model="todo.name" class="editing-label" type="text"/>
 
         <div class="actions">
-            <a href="">edit</a>
+            <!-- look at ng-inspector to see how the editing is toggled. notice the ng-hide
+            around that hide their content based on whether editing is true or false. -->
+            <a href="" ng-click="editing = !editing">edit</a>
             <a href="" ng-click="helloWorld()">save</a>
             <a href="" class="delete">delete</a>
         </div>
