@@ -9,18 +9,17 @@
 
     <!-- <hello-world></hello-world> -->
 
-    <h1>beezys to-dos</h1>
-
-    <div class="list">
+    <div ng-controller="mainCtrl" class="list">
+        <h1 ng-click="helloWorld()">beezys to-dos</h1>
         <input type="checkbox"/>
         <label class="editing-label">sampling to-do here</label>
         <input class="editing-label" type="text"/>
-    </div>
 
-    <div class="actions">
-        <a href="">edit</a>
-        <a href="">save</a>
-        <a href="" class="delete">delete</a>
+        <div class="actions">
+            <a href="">edit</a>
+            <a href="" ng-click="helloWorld()">save</a>
+            <a href="" class="delete">delete</a>
+        </div>
     </div>
 
 
