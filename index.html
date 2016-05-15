@@ -11,17 +11,23 @@
 
     <div ng-controller="mainCtrl" class="list">
         <h1 ng-click="helloWorld()">beezys to-dos</h1>
-        <div ng-repeat="todo in todos">
+        <!-- for ng-class you pass in an object, where the key is the class you want
+            to apply. the second part (editing) is the condition you are evaluating, if
+            it is true then you apply the editing.item class to the element, which can
+            be found in the css. all it does is add some top margin to the save, edit,
+            delete if in edit mode-->
+        <div class="item" ng-class="{'editing.item': editing}" ng-repeat="todo in todos">
             <input ng-model="todo.completed" type="checkbox"/>
             <!-- hide the label if editing is true down below -->
-            <label ng-hide="editing" class="editing-label">{{todo.name}}</label>
+            <label ng-hide="editing">{{todo.name}}</label>
                <!-- ng-model binds this inputs value to an object on the scope. the todo object.
                open ng-inspector and watch as a variable is created as you type in the input.
                we then changed it to todo.name. and you can watch in ng-inspector as todo is the object
                and name is the key -->
                <!-- ng-show shows the inputs contents if editing is true down below. notice
                above that ng-hide hides stuff while editing is true -->
-            <input ng-show="editing" ng-model="todo.name" class="editing-label" type="text"/>
+               <!-- ng-blur fires when the input box loses focus -->
+            <input ng-blur="editing = false" ng-show="editing" ng-model="todo.name" class="editing-label" type="text"/>
 
             <div class="actions">
                 <!-- look at ng-inspector to see how the editing is toggled. notice the ng-hide
