@@ -22,7 +22,7 @@
             <input ng-model="todo.completed" type="checkbox"/>
 
             <!-- hide the label if editing is true down below -->
-            <label ng-hide="editing">{{todo.name}}</label>
+            <label ng-click="editing = true" ng-hide="editing">{{todo.name}}</label>
                <!-- ng-model binds this inputs value to an object on the scope. the todo object.
                open ng-inspector and watch as a variable is created as you type in the input.
                we then changed it to todo.name. and you can watch in ng-inspector as todo is the object
@@ -38,7 +38,7 @@
             <div class="actions">
                 <!-- look at ng-inspector to see how the editing is toggled. notice the ng-hide
                 around that hide their content based on whether editing is true or false. -->
-                <a href="" ng-click="editing = !editing">edit</a>
+                <!-- <a href="" ng-click="editing = !editing">edit</a> -->
                 <a href="" ng-click="saveTodos(todo)">save</a>
                 <!-- $index here is a special local variable that comes with every element's local
                 scope in an ng-repeat. index is the position of this todo in the array -->
