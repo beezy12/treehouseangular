@@ -1,0 +1,47 @@
+<div ng-controller="mainCtrl" class="list">
+
+        <div class="add">
+            <a href="" ng-click="addTodo()">+ add a new task</a>
+        </div>
+
+        <!-- for ng-class you pass in an object, where the key is the class you want
+            to apply. the second part (editing) is the condition you are evaluating, if
+            it is true then you apply the editing.item class to the element, which can
+            be found in the css. all it does is add some top margin to the save, edit,
+            delete if in edit mode-->
+            <!-- so for the second ng-class evaluation, look below at the input. it has
+            an ng-change, if that input changes (if you edit it), it then sets
+            todo.edited to true. then here, if todo.edited is true, it applies the
+            'edited' class....which just puts the word 'edited' on the page next to the
+            input box -->
+        <div class="item" ng-class="{'editing.item': editing, 'edited': todo.edited, 'completed': todo.completed}" ng-repeat="todo in todos | orderBy: 'completed'" ng-init="todo.completed = false">
+        <!-- above I am filtering | orderBY whether the task is completed, and the true means reverse
+        is true. read the angular docs on that for more info. this is moving the completed task to the
+        bottom when it is checked completed. (we took that part off after we did this next part). ng-init is on there to set each item to false, because it ordered them weird. undefined items first, unchecked items second, and items that had been checked but now unchecked last. look at ng-inspector for that. the complete false or true doesn't get added until a box has been checked -->
+            <input ng-model="todo.completed" type="checkbox"/>
+
+            <!-- hide the label if editing is true down below -->
+            <label ng-hide="editing">{{todo.name}}</label>
+               <!-- ng-model binds this inputs value to an object on the scope. the todo object.
+               open ng-inspector and watch as a variable is created as you type in the input.
+               we then changed it to todo.name. and you can watch in ng-inspector as todo is the object
+               and name is the key -->
+               <!-- ng-show shows the inputs contents if editing is true down below. notice
+               above that ng-hide hides stuff while editing is true -->
+               <!-- ng-blur fires when the input box loses focus -->
+               <!-- ng-change watches an input for changes and evaluates an expression
+               when something has changed. adds the edited word next to an input when
+               it has been edited.-->
+            <input ng-change="todo.edited = true" ng-blur="editing = false" ng-show="editing" ng-model="todo.name" class="editing-label" type="text"/>
+
+            <div class="actions">
+                <!-- look at ng-inspector to see how the editing is toggled. notice the ng-hide
+                around that hide their content based on whether editing is true or false. -->
+                <a href="" ng-click="editing = !editing">edit</a>
+                <a href="" ng-click="saveTodo(todo)">save</a>
+                <!-- $index here is a special local variable that comes with every element's local
+                scope in an ng-repeat. index is the position of this todo in the array -->
+                <a href="" ng-click="deleteTodo(todo, $index)" class="delete">delete</a>
+            </div>
+        </div>
+    </div>
