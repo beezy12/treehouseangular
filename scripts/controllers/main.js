@@ -40,8 +40,14 @@ angular.module('todoListApp')
         $scope.todos.splice($index, 1);
     };
 
-    $scope.saveTodo = function(todo) {
-        dataService.saveTodo(todo);
+    // this now saves ALL todos that have been edited, and not just one
+    $scope.saveTodos = function() {
+        var filteredTodos = $scope.todos.filter(function(todo) {
+            if(todo.edited) {
+                return todo;
+            }
+        })
+        dataService.saveTodos(filteredTodos);
     }
 
 })

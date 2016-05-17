@@ -1,4 +1,5 @@
-<div ng-controller="mainCtrl" class="list">
+<!-- used to have ng-controller here but moved it to the todo.js directive controller -->
+<div class="list">
 
         <div class="add">
             <a href="" ng-click="addTodo()">+ add a new task</a>
@@ -38,7 +39,7 @@
                 <!-- look at ng-inspector to see how the editing is toggled. notice the ng-hide
                 around that hide their content based on whether editing is true or false. -->
                 <a href="" ng-click="editing = !editing">edit</a>
-                <a href="" ng-click="saveTodo(todo)">save</a>
+                <a href="" ng-click="saveTodos(todo)">save</a>
                 <!-- $index here is a special local variable that comes with every element's local
                 scope in an ng-repeat. index is the position of this todo in the array -->
                 <a href="" ng-click="deleteTodo(todo, $index)" class="delete">delete</a>
